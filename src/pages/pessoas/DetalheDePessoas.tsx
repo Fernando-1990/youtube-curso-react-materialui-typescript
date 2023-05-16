@@ -13,12 +13,15 @@ import { LayoutBaseDePagina } from '../../shared/layouts';
 interface IFormData {
   email: string;
   cidadeId: number;
-  nomeCompleto: string;
+  nome: string;
+  sobrenome: string;
 }
 const formValidationSchema: yup.SchemaOf<IFormData> = yup.object().shape({
   cidadeId: yup.number().required(),
   email: yup.string().required().email(),
-  nomeCompleto: yup.string().required().min(3),
+  nome: yup.string().required().min(3),
+  sobrenome: yup.string().required().min(3),
+  
 });
 
 export const DetalheDePessoas: React.FC = () => {
@@ -40,16 +43,17 @@ export const DetalheDePessoas: React.FC = () => {
 
           if (result instanceof Error) {
             alert(result.message);
-            navigate('/pessoas');
+            navigate('/person');
           } else {
-            setNome(result.nomeCompleto);
+            setNome(result.nome);
             formRef.current?.setData(result);
           }
         });
     } else {
       formRef.current?.setData({
         email: '',
-        nomeCompleto: '',
+        nome: '',
+        sobrenome: '',
         cidadeId: undefined,
       });
     }
@@ -73,9 +77,9 @@ export const DetalheDePessoas: React.FC = () => {
                 alert(result.message);
               } else {
                 if (isSaveAndClose()) {
-                  navigate('/pessoas');
+                  navigate('/person');
                 } else {
-                  navigate(`/pessoas/detalhe/${result}`);
+                  navigate(`/person/detalhe/${result}`);
                 }
               }
             });
@@ -89,7 +93,7 @@ export const DetalheDePessoas: React.FC = () => {
                 alert(result.message);
               } else {
                 if (isSaveAndClose()) {
-                  navigate('/pessoas');
+                  navigate('/person');
                 }
               }
             });
@@ -116,7 +120,7 @@ export const DetalheDePessoas: React.FC = () => {
             alert(result.message);
           } else {
             alert('Registro apagado com sucesso!');
-            navigate('/pessoas');
+            navigate('/person');
           }
         });
     }
@@ -135,9 +139,9 @@ export const DetalheDePessoas: React.FC = () => {
 
           aoClicarEmSalvar={save}
           aoClicarEmSalvarEFechar={saveAndClose}
-          aoClicarEmVoltar={() => navigate('/pessoas')}
+          aoClicarEmVoltar={() => navigate('/person')}
           aoClicarEmApagar={() => handleDelete(Number(id))}
-          aoClicarEmNovo={() => navigate('/pessoas/detalhe/nova')}
+          aoClicarEmNovo={() => navigate('/person/detalhe/nova')}
         />
       }
     >
@@ -160,9 +164,21 @@ export const DetalheDePessoas: React.FC = () => {
               <Grid item xs={12} sm={12} md={6} lg={4} xl={2}>
                 <VTextField
                   fullWidth
-                  name='nomeCompleto'
+                  name={'nome'}
                   disabled={isLoading}
-                  label='Nome completo'
+                  label='Nome'
+                  onChange={e => setNome(e.target.value)}
+                />
+              </Grid>
+            </Grid>
+
+            <Grid container item direction="row" spacing={2}>
+              <Grid item xs={12} sm={12} md={6} lg={4} xl={2}>
+                <VTextField
+                  fullWidth
+                  name={'sobrenome'}
+                  disabled={isLoading}
+                  label='Sobrenome'
                   onChange={e => setNome(e.target.value)}
                 />
               </Grid>

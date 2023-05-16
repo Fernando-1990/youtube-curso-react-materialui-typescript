@@ -35,7 +35,7 @@ export const DetalheDeCidades: React.FC = () => {
 
           if (result instanceof Error) {
             alert(result.message);
-            navigate('/cidades');
+            navigate('/cities');
           } else {
             setNome(result.nome);
             formRef.current?.setData(result);
@@ -65,9 +65,9 @@ export const DetalheDeCidades: React.FC = () => {
                 alert(result.message);
               } else {
                 if (isSaveAndClose()) {
-                  navigate('/cidades');
+                  navigate('/cities');
                 } else {
-                  navigate(`/cidades/detalhe/${result}`);
+                  navigate(`/cities/detalhe/${result}`);
                 }
               }
             });
@@ -81,7 +81,7 @@ export const DetalheDeCidades: React.FC = () => {
                 alert(result.message);
               } else {
                 if (isSaveAndClose()) {
-                  navigate('/cidades');
+                  navigate('/cities');
                 }
               }
             });
@@ -108,7 +108,7 @@ export const DetalheDeCidades: React.FC = () => {
             alert(result.message);
           } else {
             alert('Registro apagado com sucesso!');
-            navigate('/cidades');
+            navigate('/cities');
           }
         });
     }
@@ -127,9 +127,9 @@ export const DetalheDeCidades: React.FC = () => {
 
           aoClicarEmSalvar={save}
           aoClicarEmSalvarEFechar={saveAndClose}
-          aoClicarEmVoltar={() => navigate('/cidades')}
+          aoClicarEmVoltar={() => navigate('/cities')}
           aoClicarEmApagar={() => handleDelete(Number(id))}
-          aoClicarEmNovo={() => navigate('/cidades/detalhe/nova')}
+          aoClicarEmNovo={() => navigate('/cities/detalhe/nova')}
         />
       }
     >

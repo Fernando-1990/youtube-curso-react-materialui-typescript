@@ -22,12 +22,12 @@ export const AppRoutes = () => {
       },
       {
         icon: 'location_city',
-        path: '/cidades',
+        path: '/cities',
         label: 'Cidades',
       },
       {
         icon: 'people',
-        path: '/pessoas',
+        path: '/person',
         label: 'Pessoas',
       },
     ]);
@@ -37,11 +37,11 @@ export const AppRoutes = () => {
     <Routes>
       <Route path="/pagina-inicial" element={<Dashboard />} />
 
-      <Route path="/pessoas" element={<ListagemDePessoas />} />
-      <Route path="/pessoas/detalhe/:id" element={<DetalheDePessoas />} />
+      <Route path="/person" element={<ListagemDePessoas />} />
+      <Route path="/person/detalhe/:id" element={<DetalheDePessoas />} />
 
-      <Route path="/cidades" element={<ListagemDeCidades />} />
-      <Route path="/cidades/detalhe/:id" element={<DetalheDeCidades />} />
+      <Route path="/cities" element={<ListagemDeCidades />} />
+      <Route path="/cities/detalhe/:id" element={<DetalheDeCidades />} />
 
       <Route path="*" element={<Navigate to="/pagina-inicial" />} />
     </Routes>

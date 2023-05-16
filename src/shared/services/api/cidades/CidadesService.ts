@@ -21,7 +21,7 @@ type TCidadesComTotalCount = {
 
 const getAll = async (page = 1, filter = '', id = 0): Promise<TCidadesComTotalCount | Error> => {
   try {
-    const urlRelativa = `/cidades?page=${page}&limit=${Environment.LIMITE_DE_LINHAS}&filter=${filter}&id=${id}`;
+    const urlRelativa = `/cities?page=${page}&limit=${Environment.LIMITE_DE_LINHAS}&filter=${filter}&id=${id}`;
 
     const { data, headers } = await Api().get(urlRelativa);
 
@@ -41,7 +41,7 @@ const getAll = async (page = 1, filter = '', id = 0): Promise<TCidadesComTotalCo
 
 const getById = async (id: number): Promise<IDetalheCidade | Error> => {
   try {
-    const { data } = await Api().get(`/cidades/${id}`);
+    const { data } = await Api().get(`/cities/${id}`);
 
     if (data) {
       return data;
@@ -56,7 +56,7 @@ const getById = async (id: number): Promise<IDetalheCidade | Error> => {
 
 const create = async (dados: Omit<IDetalheCidade, 'id'>): Promise<number | Error> => {
   try {
-    const { data } = await Api().post<number>('/cidades', dados);
+    const { data } = await Api().post<number>('/cities', dados);
 
     if (data) {
       return data;
@@ -71,7 +71,7 @@ const create = async (dados: Omit<IDetalheCidade, 'id'>): Promise<number | Error
 
 const updateById = async (id: number, dados: IDetalheCidade): Promise<void | Error> => {
   try {
-    await Api().put(`/cidades/${id}`, dados);
+    await Api().put(`/cities/${id}`, dados);
   } catch (error) {
     console.error(error);
     return new Error((error as AxiosError).response?.data.errors.default || 'Erro ao atualizar o registro.');
@@ -80,7 +80,7 @@ const updateById = async (id: number, dados: IDetalheCidade): Promise<void | Err
 
 const deleteById = async (id: number): Promise<void | Error> => {
   try {
-    await Api().delete(`/cidades/${id}`);
+    await Api().delete(`/cities/${id}`);
   } catch (error) {
     return new Error((error as AxiosError).response?.data.errors.default || 'Erro ao apagar o registro.');
   }

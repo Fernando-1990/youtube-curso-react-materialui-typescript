@@ -73,7 +73,7 @@ export const ListagemDePessoas: React.FC = () => {
           mostrarInputBusca
           textoDaBusca={busca}
           textoBotaoNovo='Nova'
-          aoClicarEmNovo={() => navigate('/pessoas/detalhe/nova')}
+          aoClicarEmNovo={() => navigate('/person/detalhe/nova')}
           aoMudarTextoDeBusca={texto => setSearchParams({ busca: texto, pagina: '1' }, { replace: true })}
         />
       }
@@ -83,7 +83,7 @@ export const ListagemDePessoas: React.FC = () => {
           <TableHead>
             <TableRow>
               <TableCell width={100}>Ações</TableCell>
-              <TableCell>Nome completo</TableCell>
+              <TableCell>Nome Completo</TableCell>
               <TableCell>Email</TableCell>
             </TableRow>
           </TableHead>
@@ -94,11 +94,11 @@ export const ListagemDePessoas: React.FC = () => {
                   <IconButton size="small" onClick={() => handleDelete(row.id)}>
                     <Icon>delete</Icon>
                   </IconButton>
-                  <IconButton size="small" onClick={() => navigate(`/pessoas/detalhe/${row.id}`)}>
+                  <IconButton size="small" onClick={() => navigate(`/person/detalhe/${row.id}`)}>
                     <Icon>edit</Icon>
                   </IconButton>
                 </TableCell>
-                <TableCell>{row.nomeCompleto}</TableCell>
+                <TableCell>{row.nome + ' ' + row.sobrenome}</TableCell>
                 <TableCell>{row.email}</TableCell>
               </TableRow>
             ))}

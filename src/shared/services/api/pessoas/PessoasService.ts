@@ -8,14 +8,16 @@ export interface IListagemPessoa {
   id: number;
   email: string;
   cidadeId: number;
-  nomeCompleto: string;
+  nome: string;
+  sobrenome: string;
 }
 
 export interface IDetalhePessoa {
   id: number;
   email: string;
   cidadeId: number;
-  nomeCompleto: string;
+  nome: string;
+  sobrenome: string;
 }
 
 type TPessoasComTotalCount = {
@@ -25,7 +27,7 @@ type TPessoasComTotalCount = {
 
 const getAll = async (page = 1, filter = ''): Promise<TPessoasComTotalCount | Error> => {
   try {
-    const urlRelativa = `/pessoas?page=${page}&limit=${Environment.LIMITE_DE_LINHAS}&filter=${filter}`;
+    const urlRelativa = `/person?page=${page}&limit=${Environment.LIMITE_DE_LINHAS}&filter=${filter}`;
 
     const { data, headers } = await Api().get(urlRelativa);
 
@@ -45,7 +47,7 @@ const getAll = async (page = 1, filter = ''): Promise<TPessoasComTotalCount | Er
 
 const getById = async (id: number): Promise<IDetalhePessoa | Error> => {
   try {
-    const { data } = await Api().get(`/pessoas/${id}`);
+    const { data } = await Api().get(`/person/${id}`);
 
     if (data) {
       return data;
@@ -60,7 +62,7 @@ const getById = async (id: number): Promise<IDetalhePessoa | Error> => {
 
 const create = async (dados: Omit<IDetalhePessoa, 'id'>): Promise<number | Error> => {
   try {
-    const { data } = await Api().post<number>('/pessoas', dados);
+    const { data } = await Api().post<number>('/person', dados);
 
     if (data) {
       return data;
@@ -75,7 +77,7 @@ const create = async (dados: Omit<IDetalhePessoa, 'id'>): Promise<number | Error
 
 const updateById = async (id: number, dados: IDetalhePessoa): Promise<void | Error> => {
   try {
-    await Api().put(`/pessoas/${id}`, dados);
+    await Api().put(`/person/${id}`, dados);
   } catch (error) {
     console.error(error);
     return new Error((error as AxiosError).response?.data.errors.default || 'Erro ao atualizar o registro.');
@@ -84,7 +86,7 @@ const updateById = async (id: number, dados: IDetalhePessoa): Promise<void | Err
 
 const deleteById = async (id: number): Promise<void | Error> => {
   try {
-    await Api().delete(`/pessoas/${id}`);
+    await Api().delete(`/person/${id}`);
   } catch (error) {
     console.error(error);
     return new Error((error as AxiosError).response?.data.errors.default || 'Erro ao apagar o registro.');

@@ -73,7 +73,7 @@ export const ListagemDeCidades: React.FC = () => {
           mostrarInputBusca
           textoDaBusca={busca}
           textoBotaoNovo='Nova'
-          aoClicarEmNovo={() => navigate('/cidades/detalhe/nova')}
+          aoClicarEmNovo={() => navigate('/cities/detalhe/nova')}
           aoMudarTextoDeBusca={texto => setSearchParams({ busca: texto, pagina: '1' }, { replace: true })}
         />
       }
@@ -93,7 +93,7 @@ export const ListagemDeCidades: React.FC = () => {
                   <IconButton size="small" onClick={() => handleDelete(row.id)}>
                     <Icon>delete</Icon>
                   </IconButton>
-                  <IconButton size="small" onClick={() => navigate(`/cidades/detalhe/${row.id}`)}>
+                  <IconButton size="small" onClick={() => navigate(`/cities/detalhe/${row.id}`)}>
                     <Icon>edit</Icon>
                   </IconButton>
                 </TableCell>
